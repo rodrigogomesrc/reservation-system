@@ -1,16 +1,26 @@
 package application;
 
-import model.ClientRestaurant;
-import model.ClientRestaurantInterface;
+import model.ClientData;
+import model.RestaurantListInterface;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 public class Main {
-    public static void main(String[] args) throws RemoteException {
-        System.out.println("Hello World");
-        //Todo import the remote classes here
+    public static void main(String[] args) throws MalformedURLException, RemoteException, NotBoundException {
 
-        ClientRestaurantInterface client = new ClientRestaurant("Nome", 12345678900L);
+        System.out.println("Client running...");
+
+        RestaurantListInterface restaurants = (RestaurantListInterface) Naming.lookup("rmi://127.0.0.1:1098/RestaurantServer");
+
+        ClientData client = new ClientData(12345678900L, "Rodrigo");
+
+        System.out.println("Showing menu...");
+        System.out.println(restaurants.getRestaurantMenu("Grande restaurante"));
+
+        //System.out.println(restaurants.attemptReservation("Grande restaurante", "26/01/2022", client));
 
     }
 }

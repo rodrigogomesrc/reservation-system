@@ -17,18 +17,8 @@ import model.RestaurantListInterface;
 public class Main {
     public static void main(String[] args) throws RemoteException, MalformedURLException {
 
-        //Todo serve remote classes here as example
+		System.out.println("Server running...");
 
-        /*
-
-        System.setProperty("java.rmi.server.hostname","127.0.0.1");
-
-		HelloServerInterface server = new HelloServer();
-
-		LocateRegistry.createRegistry(1098);
-
-		Naming.rebind("rmi://127.0.0.1:1098/HelloServerCallbak", server);
-         */
     	ArrayList<MenuItem> menuRestaurant1 = new ArrayList<MenuItem>(Arrays.asList(
     			new MenuItem("Petit gateau", 15.0f), 
     			new MenuItem("mini coxinha", 2f)
