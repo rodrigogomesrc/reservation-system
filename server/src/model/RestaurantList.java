@@ -6,6 +6,10 @@ import java.util.HashMap;
 
 public class RestaurantList extends UnicastRemoteObject implements RestaurantListInterface {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5196190113082858878L;
 	private HashMap<String,Restaurant> restaurants;
 	
 	public RestaurantList(HashMap<String,Restaurant> restaurants) throws RemoteException {
@@ -13,9 +17,9 @@ public class RestaurantList extends UnicastRemoteObject implements RestaurantLis
 	}
 	
 	@Override
-	public String attemptReservation(String restaurantName, String date, ClientData client) throws RemoteException {
+	public String attemptReservation(String restaurantName, String date, ClientData client, ClientCommunicationInterface clientCommunication) throws RemoteException {
 		if(!restaurants.containsKey(restaurantName)) return "Restaurante inexistente";
-		return restaurants.get(restaurantName).attemptReservation(date, client);
+		return restaurants.get(restaurantName).attemptReservation(date, client, clientCommunication);
 	}
 
 	@Override

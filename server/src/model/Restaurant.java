@@ -19,13 +19,13 @@ public class Restaurant{
     }
 
 
-	public String attemptReservation(String date, ClientData client) throws RemoteException{
+	public String attemptReservation(String date, ClientData client, ClientCommunicationInterface clientCommunication) throws RemoteException{
 		Booking booking = bookings.get(date);
 		if(booking==null) {
 			booking = new Booking(bookingCapacity);
 			bookings.put(date, booking);
 		}
-		return booking.attemptReservation(client);
+		return booking.attemptReservation(client, clientCommunication);
 	}
 
 	public String cancelReservation(String date, long cpf) throws RemoteException{

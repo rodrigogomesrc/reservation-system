@@ -1,11 +1,18 @@
 package model;
 
-public class ClientData {
+import java.io.Serializable;
+import java.rmi.RemoteException;
 
-    private long cpf;
+public class ClientData implements Serializable{
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3526046263276619197L;
+	private long cpf;
     private String name;
 
-    public ClientData(long cpf, String name){
+    public ClientData(long cpf, String name) throws RemoteException{
         super();
         this.cpf = cpf;
         this.setName(name);

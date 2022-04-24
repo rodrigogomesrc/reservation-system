@@ -1,5 +1,7 @@
 package application;
 
+import model.ClientCommunication;
+import model.ClientCommunicationInterface;
 import model.ClientData;
 import model.RestaurantListInterface;
 
@@ -16,11 +18,11 @@ public class Main {
         RestaurantListInterface restaurants = (RestaurantListInterface) Naming.lookup("rmi://127.0.0.1:1098/RestaurantServer");
 
         ClientData client = new ClientData(12345678900L, "Rodrigo");
-
+        ClientCommunicationInterface clientCommunication = new ClientCommunication();
         System.out.println("Showing menu...");
         System.out.println(restaurants.getRestaurantMenu("Grande restaurante"));
 
-        //System.out.println(restaurants.attemptReservation("Grande restaurante", "26/01/2022", client));
+        System.out.println(restaurants.attemptReservation("Grande restaurante", "26/01/2022", client, clientCommunication));
 
     }
 }

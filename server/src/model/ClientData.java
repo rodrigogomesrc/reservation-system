@@ -1,36 +1,42 @@
 package model;
 
-public class ClientData{
+import java.io.Serializable;
+import java.rmi.RemoteException;
 
+public class ClientData implements Serializable{
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3526046263276619197L;
 	private long cpf;
-	private String name;
-	
-	public ClientData(long cpf, String name){
-		super();
-		this.cpf = cpf;
-		this.setName(name);
-	}
+    private String name;
 
-	@Override
-	public boolean equals(Object obj) {
-		ClientData other = (ClientData)obj;
-		return this.cpf==other.cpf;
-	}
+    public ClientData(long cpf, String name) throws RemoteException{
+        super();
+        this.cpf = cpf;
+        this.setName(name);
+    }
 
-	public String getName() {
-		return name;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        ClientData other = (ClientData)obj;
+        return this.cpf==other.cpf;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public long getCpf() {
-		return cpf;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setCpf(long cpf) {
-		this.cpf = cpf;
-	}
+    public long getCpf() {
+        return cpf;
+    }
 
+    public void setCpf(long cpf) {
+        this.cpf = cpf;
+    }
 }
