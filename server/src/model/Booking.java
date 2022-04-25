@@ -27,8 +27,15 @@ public class Booking{
         //will send a reservation confirmation for the first client in the waiting list if any exists
         //and if the client that canceled the reservation was not already on the waiting list
         if(clientIndex<=capacity&&clients.size()>=capacity) {
-        	ClientCommunicationInterface comm = (ClientCommunicationInterface) clients.get(capacity-1).getClientCommunication();
-            comm.receiveReservationStatus("Sua reserva no restaurante "+restaurantName+" na data "+ date+" foi confirmada!");
+            ClientRestaurant toNotify = clients.get(capacity-1);
+        	ClientCommunicationInterface comm = toNotify.getClientCommunication();
+            comm.receiveReservationStatus(
+                    toNotify.getClientData().getName()
+                            + ", Sua reserva no restaurante "
+                            + restaurantName+" na data "
+                            + date
+                            +" foi confirmada!"
+            );
         }
         return "Sua reserva foi cancelada";
     }
