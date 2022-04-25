@@ -9,33 +9,75 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws MalformedURLException, RemoteException, NotBoundException {
 
-        System.out.println("Client running...");
-
         RestaurantListInterface restaurants = (RestaurantListInterface) Naming.lookup("rmi://127.0.0.1:1098/RestaurantServer");
 
-        ClientData client = new ClientData(12345678900L, "Rodrigo");
-        ClientData client2 = new ClientData(22345678900L, "Felipe");
-        ClientData client3 = new ClientData(32345678900L, "João");
+        while(true){
+            System.out.println("***Sistema de reservas de Restaurante***");
+            System.out.println("Digite uma das opções: ");
+            System.out.println("1 para ver o menu");
+            System.out.println("2 para fazer uma reserva");
+            System.out.println("3 para cancelar uma reserva");
+            System.out.println("Digite outro número para sair do programa");
 
-        ClientCommunicationInterface clientCommunication = new ClientCommunication();
+            Scanner sc = new Scanner(System.in);
+            int option = sc.nextInt();
 
-        System.out.println("Mostrando o menu dos restaurantes: ");
-        System.out.println("Mini Restaurante: ");
-        System.out.println(restaurants.getRestaurantMenu("Mini restaurante"));
-        System.out.println("Normal Restaurante: ");
-        System.out.println(restaurants.getRestaurantMenu("Normal restaurante"));
-        System.out.println("Grande Restaurante: ");
-        System.out.println(restaurants.getRestaurantMenu("Grande restaurante"));
+            if(option == 1){
+                System.out.println("Digite o nome do Restaurante: ");
+                sc = new Scanner(System.in);
+                String name = sc.nextLine();
+                System.out.println("*** Menu ***");
+                System.out.println(restaurants.getRestaurantMenu(name));
 
-        System.out.println(restaurants.attemptReservation("Mini restaurante", "26/01/2022", client, clientCommunication));
-        System.out.println(restaurants.attemptReservation("Mini restaurante", "26/01/2022", client2, clientCommunication));
-        System.out.println(restaurants.attemptReservation("Mini restaurante", "26/01/2022", client3, clientCommunication));
+            } else if (option == 2){
+                sc = new Scanner(System.in);
 
-        System.out.println(restaurants.cancelReservation("Mini restaurante", "26/01/2022", 22345678900L));
+                System.out.println("Digite o seu nome: ");
+                String name = sc.nextLine();
+                System.out.println(name);
+
+                System.out.println("Digite o seu cpf: ");
+                long cpf = sc.nextLong();
+                System.out.println(cpf);
+
+                System.out.println("Digite o nome do Restaurante: ");
+                sc = new Scanner(System.in);
+                String nameRestaurant = sc.nextLine();
+                System.out.println(nameRestaurant);
+
+                System.out.println("Digite a data da reserva: ");
+                sc = new Scanner(System.in);
+                String date = sc.nextLine();
+                System.out.println(date);
+
+                ClientData client = new ClientData(cpf, name);
+                ClientCommunicationInterface clientCommunication = new ClientCommunication();
+                System.out.println(restaurants.attemptReservation(nameRestaurant, date, client, clientCommunication));
+
+            } else if (option == 3) {
+                System.out.println("Digite o nome do Restaurante: ");
+                sc = new Scanner(System.in);
+                String nameRestaurant = sc.nextLine();
+                System.out.println(nameRestaurant);
+
+                System.out.println("Digite o seu cpf: ");
+                long cpf = sc.nextLong();
+                System.out.println(cpf);
+
+                System.out.println("Digite a data da reserva: ");
+                sc = new Scanner(System.in);
+                String date = sc.nextLine();
+                System.out.println(date);
+                System.out.println(restaurants.cancelReservation(nameRestaurant, date, cpf));
+            } else {
+                break;
+            }
+        }
 
     }
 }
