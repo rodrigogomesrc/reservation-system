@@ -13,7 +13,12 @@ public class ClientCommunication extends UnicastRemoteObject implements ClientCo
 
     @Override
     public void receiveReservationStatus(String status) throws RemoteException {
-        System.out.println("Recebendo mensagem: ");
         System.out.println(status);
+        System.out.println("");
+        System.out.println("Digite uma das opções: ");
+        System.out.println("1 para ver o menu");
+        System.out.println("2 para fazer uma reserva");
+        System.out.println("3 para cancelar uma reserva");
+        System.out.println("Digite outro número para sair do programa");
     }
 }
