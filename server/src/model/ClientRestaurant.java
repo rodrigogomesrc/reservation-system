@@ -23,7 +23,7 @@ public class ClientRestaurant {
 	}
 	@Override
 	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		return clientData.equals(obj);
+		ClientRestaurant other = (ClientRestaurant) obj;
+		return clientData.equals(other.getClientData());
 	}
 }

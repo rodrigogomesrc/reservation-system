@@ -23,7 +23,7 @@ public class MenuItem {
 	}
 	@Override
 	public String toString() {
-		return "prato: "+ name + "preço: " + price;
+		return "Prato: "+ name + " Preço: " + price;
 	}
 	
 }
