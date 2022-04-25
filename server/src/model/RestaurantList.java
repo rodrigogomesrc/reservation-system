@@ -2,6 +2,7 @@ package model;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class RestaurantList extends UnicastRemoteObject implements RestaurantListInterface {
@@ -33,6 +34,10 @@ public class RestaurantList extends UnicastRemoteObject implements RestaurantLis
 	public String getRestaurantMenu(String restaurantName) throws RemoteException {
 		if(!restaurants.containsKey(restaurantName)) return "Restaurante inexistente";
 		return restaurants.get(restaurantName).getRestaurantMenu();
+	}
+	@Override
+	public ArrayList<String> getRestaurantList() throws RemoteException {
+		return new ArrayList<String>(restaurants.keySet());
 	}
 
 }
