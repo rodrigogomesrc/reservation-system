@@ -71,6 +71,7 @@ public class Main {
         }
 
     } private static String getRestaurantName(RestaurantListInterface restaurants) throws RemoteException {
+        Scanner sc;
         ArrayList<String> restaurantsList = restaurants.getRestaurantList();
         HashMap<Integer,String> restaurantsIndice = new HashMap<>();
 
