@@ -20,7 +20,7 @@ public class Main {
 
         System.out.println("*** Sistema de reservas de Restaurante ***");
         System.out.println("Para utilizar o sistema, vamos fazer o seu cadastro. ");
-        Scanner sc = new Scanner(System.in);
+        Scanner sc;
         sc = new Scanner(System.in);
 
         System.out.println("Digite o seu nome: ");
@@ -42,11 +42,13 @@ public class Main {
 
             if(option == 1){
 
+                String restaurantName = getRestaurantName(restaurants);
+
                 System.out.println("Digite o nome do Restaurante: ");
                 sc = new Scanner(System.in);
 
                 System.out.println("*** Menu ***");
-                System.out.println(restaurants.getRestaurantMenu(name));
+                System.out.println(restaurants.getRestaurantMenu(restaurantName));
 
             } else if (option == 2){
 
@@ -71,7 +73,7 @@ public class Main {
         }
 
     } private static String getRestaurantName(RestaurantListInterface restaurants) throws RemoteException {
-        Scanner sc;
+        Scanner sc = new Scanner(System.in);
         ArrayList<String> restaurantsList = restaurants.getRestaurantList();
         HashMap<Integer,String> restaurantsIndice = new HashMap<>();
 
