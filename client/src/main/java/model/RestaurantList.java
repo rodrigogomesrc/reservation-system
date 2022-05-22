@@ -16,7 +16,9 @@ public class RestaurantList {
     }
 
     public String listRestaurants(){
-       //Return a string with all restaurants Names
-        return "";
+        StringBuilder s = new StringBuilder();
+        for(String r : this.getRestaurants().getRestaurantes())
+            s.append("Nome: ").append(r).append("\n");
+        return s.toString();
     }
 }

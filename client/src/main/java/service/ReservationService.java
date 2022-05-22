@@ -1,27 +1,61 @@
 package service;
 
+import model.DTO.ClientDataDTO;
 import model.DTO.MenuDTO;
 import model.DTO.RestaurantListDTO;
+import model.Menu;
+import model.RestaurantList;
+
+import java.util.ArrayList;
 
 public class ReservationService {
 
+    //Route
+    public static String attemptReservation(String restaurantName, String date,  ClientDataDTO client){
 
-    private static String attemptReservation(String date, String restaurantName){
+        //Testing converting Object to String
+
+        /*
+
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        try {
+            String json = ow.writeValueAsString(client);
+            System.out.println(json);
+        } catch (JsonProcessingException e) {
+           e.printStackTrace();
+        }
+
+         */
+
+        return "";
+    }
+    //Route
+    public static String cancelReservation(String restaurantName, String date, long cpf){
         return "";
     }
 
-    private static String cancelReservation(String date, long cpf){
-        return "";
-    }
-
-    private static MenuDTO getRestaurantMenu(String restaurantName){
+    //Route
+    public static MenuDTO getRestaurantMenu(String restaurantName){
         MenuDTO menu = new MenuDTO();
         return menu;
     }
 
-    private static RestaurantListDTO getRestaurantsList(){
-        RestaurantListDTO restaurants = new RestaurantListDTO();
+    public static String getStringRestaurantMenu(String restaurantName){
+        Menu menu = new Menu(getRestaurantMenu(restaurantName));
+        return menu.listMenu();
+    }
+
+    //Route
+    public static RestaurantList getRestaurantsList(){
+        RestaurantListDTO restaurantsDTO = new RestaurantListDTO();
+        RestaurantList restaurants = new RestaurantList(restaurantsDTO);
         return restaurants;
+    }
+
+    public static ArrayList<String> getRestaurantsStringList(){
+        RestaurantList restaurants = getRestaurantsList();
+        RestaurantListDTO restaurantsDTO = restaurants.getRestaurants();
+        return  restaurantsDTO.getRestaurantes();
     }
 
 

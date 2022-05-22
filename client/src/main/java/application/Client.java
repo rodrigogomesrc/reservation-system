@@ -1,24 +1,18 @@
 package application;
 
+import model.DTO.ClientDataDTO;
+import model.RestaurantList;
+import service.ReservationService;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
+
 public class Client {
     public static void main(String[] args) {
-        System.out.println("Hello world from Client");
 
-        //Testing converting Object to String
-        /*
-        ClientData object = new ClientData(123, "teste");
-
-        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        try {
-            String json = ow.writeValueAsString(object);
-            System.out.println(json);
-        } catch (JsonProcessingException e) {
-           e.printStackTrace();
-        }
-         */
-
-        /*
-        RestaurantListInterface restaurants = (RestaurantListInterface) Naming.lookup("rmi://127.0.0.1:1098/RestaurantServer");
+        RestaurantList restaurants = ReservationService.getRestaurantsList();
+        //RestaurantListInterface restaurants = (RestaurantListInterface) Naming.lookup("rmi://127.0.0.1:1098/RestaurantServer");
 
         System.out.println("*** Sistema de reservas de Restaurante ***");
         System.out.println("Para utilizar o sistema, vamos fazer o seu cadastro. ");
@@ -44,43 +38,41 @@ public class Client {
 
             if(option == 1){
 
-                String restaurantName = getRestaurantName(restaurants);
+                String restaurantName = getRestaurantName();
 
                 System.out.println("Digite o nome do Restaurante: ");
                 sc = new Scanner(System.in);
 
                 System.out.println("*** Menu ***");
-                System.out.println(restaurants.getRestaurantMenu(restaurantName));
+                System.out.println(ReservationService.getStringRestaurantMenu(restaurantName));
 
             } else if (option == 2){
 
-                String restaurantName = getRestaurantName(restaurants);
+                String restaurantName = getRestaurantName();
                 System.out.println("Digite a data da reserva: ");
                 sc = new Scanner(System.in);
                 String date = sc.nextLine();
 
                 ClientDataDTO client = new ClientDataDTO(cpf, name);
-                ClientCommunicationInterface clientCommunication = new ClientCommunication();
-                System.out.println(restaurants.attemptReservation(restaurantName, date, client, clientCommunication));
+                System.out.println(ReservationService.attemptReservation(restaurantName, date, client));
 
             } else if (option == 3) {
-                String restaurantName = getRestaurantName(restaurants);
+                String restaurantName = getRestaurantName();
                 System.out.println("Digite a data da reserva: ");
                 sc = new Scanner(System.in);
                 String date = sc.nextLine();
-                System.out.println(restaurants.cancelReservation(restaurantName, date, cpf));
+
+                System.out.println(ReservationService.cancelReservation(restaurantName, date, cpf));
             } else {
                 break;
             }
         }
-        */
 
     }
 
-    /*
-    private static String getRestaurantName(RestaurantListInterface restaurants){
+    private static String getRestaurantName(){
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> restaurantsList = restaurants.getRestaurantList();
+        ArrayList<String> restaurantsList = ReservationService.getRestaurantsStringList();
         HashMap<Integer,String> restaurantsIndice = new HashMap<>();
 
         int indice = 1;
@@ -105,6 +97,4 @@ public class Client {
 
         }
     }
-
-     */
 }

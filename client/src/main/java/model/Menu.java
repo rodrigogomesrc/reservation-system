@@ -16,7 +16,9 @@ public class Menu {
     }
 
     public String listMenu(){
-        //return a String with all Menu Items
-        return "";
+        StringBuilder s = new StringBuilder();
+		for(MenuItemDTO m : this.menu.getMenu())
+			s.append("Prato: ").append(m.getName()).append(" Preço: ").append(m.getPrice()).append("\n");
+		return s.toString();
     }
 }
