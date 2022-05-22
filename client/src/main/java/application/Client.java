@@ -11,9 +11,6 @@ import java.util.Scanner;
 public class Client {
     public static void main(String[] args) {
 
-        RestaurantList restaurants = ReservationService.getRestaurantsList();
-        //RestaurantListInterface restaurants = (RestaurantListInterface) Naming.lookup("rmi://127.0.0.1:1098/RestaurantServer");
-
         System.out.println("*** Sistema de reservas de Restaurante ***");
         System.out.println("Para utilizar o sistema, vamos fazer o seu cadastro. ");
         Scanner sc;
@@ -81,8 +78,6 @@ public class Client {
             restaurantsIndice.put(indice, r);
             indice++;
         }
-
-        String restaurantName = "";
 
         while(true){
             System.out.println("Digite o código do Restaurante: ");
