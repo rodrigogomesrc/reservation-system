@@ -1,14 +1,17 @@
-package br.imd.reservationsystem.server.application;
+package br.imd.reservationsystem.server;
 
+import controller.TestController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@ComponentScan(basePackageClasses = TestController.class)
 public class ServerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ServerApplication.class, args);
-		System.out.println("Server running...");
+
 	}
 
 }

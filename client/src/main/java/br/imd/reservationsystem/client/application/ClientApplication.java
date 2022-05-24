@@ -1,7 +1,6 @@
 package br.imd.reservationsystem.client.application;
 
 import model.DTO.ClientDataDTO;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import service.ReservationService;
 
@@ -13,7 +12,6 @@ import java.util.Scanner;
 public class ClientApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ClientApplication.class, args);
 
 		System.out.println("*** Sistema de reservas de Restaurante ***");
 		System.out.println("Para utilizar o sistema, vamos fazer o seu cadastro. ");
@@ -68,6 +66,7 @@ public class ClientApplication {
 				break;
 			}
 		}
+
 	}
 
 	private static String getRestaurantName(){
