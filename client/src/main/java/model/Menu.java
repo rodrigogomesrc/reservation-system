@@ -17,8 +17,8 @@ public class Menu {
 
     public String listMenu(){
         StringBuilder s = new StringBuilder();
-		for(MenuItemDTO m : this.menu.getMenu())
-			s.append("Prato: ").append(m.getName()).append(" Preço: ").append(m.getPrice()).append("\n");
-		return s.toString();
+        for(MenuItemDTO m : this.menu.getMenu())
+            s.append("Prato: ").append(m.getName()).append(" Preço: ").append(m.getPrice()).append("\n");
+        return s.toString();
     }
 }
