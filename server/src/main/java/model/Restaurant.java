@@ -1,8 +1,5 @@
 package model;
 
-import model.DTO.MenuItemDTO;
-import service.Booking;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -16,37 +13,30 @@ public class Restaurant {
         this.name = name;
         this.menu = menu;
         this.bookingCapacity = bookingCapacity;
+        this.bookings = new HashMap<String,Booking>();
+    }
+    public String attemptReservation(String date, ClientData client){
+        Booking booking = bookings.get(date);
+        if(booking==null) {
+            booking = new Booking(bookingCapacity);
+            bookings.put(date, booking);
+        }
+        return booking.attemptReservation(client);
     }
 
-    public String getName() {
-        return name;
+    public String cancelReservation(String date, long cpf, HashMap<Long, ArrayList<String>> reservationStatusChange){
+        Booking booking = bookings.get(date);
+        if(booking == null)
+            return "Não há reserva para essa data";
+        return booking.cancelReservation(name,date,cpf, reservationStatusChange);
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public HashMap<String, Booking> getBookings() {
-        return bookings;
-    }
-
-    public void setBookings(HashMap<String, Booking> bookings) {
-        this.bookings = bookings;
-    }
 
     public ArrayList<MenuItem> getMenu() {
         return menu;
     }
 
-    public void setMenu(ArrayList<MenuItem> menu) {
-        this.menu = menu;
-    }
-
-    public int getBookingCapacity() {
-        return bookingCapacity;
-    }
-
-    public void setBookingCapacity(int bookingCapacity) {
-        this.bookingCapacity = bookingCapacity;
+    public String getName() {
+        return name;
     }
 }

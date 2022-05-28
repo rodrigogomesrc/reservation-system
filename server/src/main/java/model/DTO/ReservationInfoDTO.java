@@ -5,13 +5,17 @@ public class ReservationInfoDTO {
     private String date;
     private long cpf;
 
+    private String clientName;
     public ReservationInfoDTO() {
     }
 
-    public ReservationInfoDTO(String restaurantName, String date, long cpf) {
+
+
+    public ReservationInfoDTO(String restaurantName, String date, long cpf, String clientName) {
         this.restaurantName = restaurantName;
         this.date = date;
         this.cpf = cpf;
+        this.clientName = clientName;
     }
 
     public String getRestaurantName() {
@@ -36,5 +40,12 @@ public class ReservationInfoDTO {
 
     public void setCpf(long cpf) {
         this.cpf = cpf;
+    }
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 }

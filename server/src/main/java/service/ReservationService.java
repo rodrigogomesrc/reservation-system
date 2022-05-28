@@ -1,5 +1,6 @@
 package service;
 
+import model.ClientData;
 import model.MenuItem;
 import model.Restaurant;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import java.util.HashMap;
 @Service
 public class ReservationService {
     HashMap<String, Restaurant> restaurants = new HashMap<String,Restaurant>();
+    HashMap<Long, ArrayList<String>> reservationStatusChange = new HashMap<Long, ArrayList<String>>();
     public ReservationService() {
         ArrayList<MenuItem> menuRestaurant1 = new ArrayList<MenuItem>(Arrays.asList(
                 new MenuItem("Petit gateau", 15.0f),
@@ -38,5 +40,24 @@ public class ReservationService {
     }
     public ArrayList<MenuItem> getRestaurantMenu(String restaurantName){
         return restaurants.get(restaurantName).getMenu();
+    }
+    public String attemptReservation(String restaurantName, String date, ClientData client){
+        if(!restaurants.containsKey(restaurantName)) return "Restaurante inexistente";
+        return restaurants.get(restaurantName).attemptReservation(date, client);
+    }
+    public String cancelReservation(String restaurantName, String date, Long cpf){
+        if(!restaurants.containsKey(restaurantName)) return "Restaurante inexistente";
+        return restaurants.get(restaurantName).cancelReservation(date, cpf, reservationStatusChange);
+    }
+    public String checkReservationsStatus(long cpf){
+        String response = "";
+        if(!reservationStatusChange.containsKey(cpf)){
+            return response;
+        }
+        for (String reservation:reservationStatusChange.get(cpf)) {
+            response+=reservation+"\n";
+        }
+        reservationStatusChange.remove(cpf);
+        return response;
     }
 }
