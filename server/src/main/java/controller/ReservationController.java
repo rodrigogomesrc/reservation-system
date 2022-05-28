@@ -47,7 +47,7 @@ public class ReservationController {
         MenuDTO menu = new MenuDTO(menuItensDTO);
         return ResponseEntity.ok().body(menu);
     }
-    @GetMapping("/checkReservationStatus")
+    @PostMapping("/checkReservationStatus")
     public ResponseEntity<String> checkReservationsStatus(@RequestBody ClientDataDTO cdDTO){
         String response = reservationService.checkReservationsStatus(cdDTO.getCpf());
         return ResponseEntity.ok().body(response);
