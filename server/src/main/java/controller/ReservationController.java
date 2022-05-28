@@ -1,13 +1,16 @@
 package controller;
 
+import model.DTO.ReservationInfoDTO;
+import model.DTO.RestaurantListDTO;
+import model.RestaurantList;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import service.ReservationService;
 
 @RestController
 public class ReservationController {
+    private final ReservationService reservationService;
     /*
     PostMapping("/hours")
     public ResponseEntity<HourListConsumptionDTO> getConsumptionByHourOfDay(
@@ -28,9 +31,22 @@ public class ReservationController {
         return ResponseEntity.ok().body(response);
     }
      */
-    @PostMapping("/attemptReservation")
-    public ResponseEntity<String> attemptReservation(@RequestBody String reservationInfo){
 
+
+    public ReservationController(){
+        this.reservationService = new ReservationService();
+    }
+    @PostMapping("/attemptReservation")
+    public ResponseEntity<String> attemptReservation(@RequestBody ReservationInfoDTO riDTO){
+
+        return null;
     }
 
+
+    @GetMapping("/getRestaurantsList")
+    public ResponseEntity<RestaurantListDTO> getRestaurantsList(){
+        RestaurantListDTO rlDTO = new RestaurantListDTO();
+        rlDTO.setRestaurantes(reservationService.getRestaurantList());
+        return  ResponseEntity.ok().body(rlDTO);
+    }
 }

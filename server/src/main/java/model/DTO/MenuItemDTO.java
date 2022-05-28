@@ -1,6 +1,10 @@
 package model.DTO;
 
 public class MenuItemDTO {
+    public MenuItemDTO(String name, float price) {
+        this.name = name;
+        this.price = price;
+    }
 
     private String name;
     private float price;
