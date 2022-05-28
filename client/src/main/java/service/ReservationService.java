@@ -16,7 +16,7 @@ public class ReservationService {
     //Request
     public static String attemptReservation(String restaurantName, String date,  ClientDataDTO client){
         String context = "/attemptReservation";
-        String json = "{\"restaurantName\":\"" + restaurantName + "\",\"date\":\"" + date + "\",\"client\":\"" + client.toString() + "\"}";
+        String json = "{\"restaurantName\":\"" + restaurantName + "\",\"date\":\"" + date + "\",\"cpf\":\"" + client.getCpf() + "\",\"clientName\":\"" + client.getName() + "\"}";
         try {
             return Requests.postString(context, json);
         } catch (UnsupportedEncodingException e) {
@@ -38,7 +38,7 @@ public class ReservationService {
     //Request
     public static MenuDTO getRestaurantMenu(String restaurantName){
         String context = "/getRestaurantMenu";
-        String json = "{\"restaurantName\":\"" + restaurantName + "\"}";
+        String json = "{\"name\":\"" + restaurantName + "\"}";
         String response = null;
         try {
             response = Requests.postString(context, json);
@@ -68,7 +68,7 @@ public class ReservationService {
     //Request
     public static String checkReservationStatus(String restaurantName, String date, long cpf){
         String context = "/checkReservationStatus";
-        String json = "{\"restaurantName\":\"" + restaurantName + "\",\"date\":\"" + date + "\",\"cpf\":\"" + cpf + "\"}";
+        String json = "{\"cpf\":\"" + cpf + "\"}";
         try {
             return Requests.postString(context, json);
         } catch (UnsupportedEncodingException e) {
