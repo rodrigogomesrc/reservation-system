@@ -15,8 +15,6 @@ public class ReservationService {
 
     //Request
     public static String attemptReservation(String restaurantName, String date,  ClientDataDTO client){
-
-        //create a post request to send a json object with parameters
         String context = "/attemptReservation";
         String json = "{\"restaurantName\":\"" + restaurantName + "\",\"date\":\"" + date + "\",\"client\":\"" + client.toString() + "\"}";
         try {
@@ -28,7 +26,6 @@ public class ReservationService {
 
     //Request
     public static String cancelReservation(String restaurantName, String date, long cpf){
-        //create a post request to send a json object with parameters
         String context = "/cancelReservation";
         String json = "{\"restaurantName\":\"" + restaurantName + "\",\"date\":\"" + date + "\",\"cpf\":\"" + cpf + "\"}";
         try {
@@ -40,7 +37,6 @@ public class ReservationService {
 
     //Request
     public static MenuDTO getRestaurantMenu(String restaurantName){
-        //create a post request to send a json object with parameters
         String context = "/getRestaurantMenu";
         String json = "{\"restaurantName\":\"" + restaurantName + "\"}";
         String response = null;
@@ -57,7 +53,6 @@ public class ReservationService {
 
     //Request
     public static RestaurantList getRestaurantsList(){
-
         String context = "/getRestaurantsList";
         String response = null;
         response = Requests.getString(context);
@@ -69,6 +64,18 @@ public class ReservationService {
         }
         return new RestaurantList(restaurantListDTO);
     }
+
+    //Request
+    public static String checkReservationStatus(String restaurantName, String date, long cpf){
+        String context = "/checkReservationStatus";
+        String json = "{\"restaurantName\":\"" + restaurantName + "\",\"date\":\"" + date + "\",\"cpf\":\"" + cpf + "\"}";
+        try {
+            return Requests.postString(context, json);
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     private static RestaurantListDTO getRestaurantListDTOFromJSON(String json){
         Gson g = new Gson();
