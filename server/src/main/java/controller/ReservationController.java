@@ -1,12 +1,14 @@
 package controller;
 
-import model.DTO.ReservationInfoDTO;
-import model.DTO.RestaurantListDTO;
+import model.DTO.*;
 import model.RestaurantList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import service.ReservationService;
+
+import java.awt.*;
+import java.util.ArrayList;
 
 @RestController
 public class ReservationController {
@@ -48,5 +50,18 @@ public class ReservationController {
         RestaurantListDTO rlDTO = new RestaurantListDTO();
         rlDTO.setRestaurantes(reservationService.getRestaurantList());
         return  ResponseEntity.ok().body(rlDTO);
+    }
+    @GetMapping("/getRestaurantMenu")
+    public ResponseEntity<MenuDTO> getRestaurantMenu(@RequestBody RestaurantDTO rDTO){
+        String restaurant = rDTO.getName();
+        ArrayList<MenuItemDTO> menuItensDTO = new ArrayList<MenuItemDTO>();
+        reservationService.getRestaurantMenu(restaurant).forEach(menuItem ->
+                menuItensDTO.add(
+                        new MenuItemDTO(menuItem.getName(),menuItem.getPrice()
+                        )
+                )
+        );
+        MenuDTO menu = new MenuDTO(menuItensDTO);
+        return ResponseEntity.ok().body(menu);
     }
 }
