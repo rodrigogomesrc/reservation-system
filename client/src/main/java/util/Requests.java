@@ -7,25 +7,31 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
-
+import org.apache.http.util.EntityUtils;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
-import static org.apache.http.client.utils.URLEncodedUtils.CONTENT_TYPE;
 import static org.apache.http.impl.client.HttpClients.createDefault;
 
 public class Requests {
-    public static final String ENDPOINT = "http://127.0.0.1:8080" ;
+    public static final String ENDPOINT = "http://127.0.0.1:8082" ;
 
     public static String postString(String context, String data) throws UnsupportedEncodingException {
         CloseableHttpClient httpClient = createDefault();
         HttpPost httpPost = new HttpPost(ENDPOINT + context);
-        httpPost.setHeader(CONTENT_TYPE, "application/json");
+        httpPost.setHeader("Content-Type", "application/json");
         httpPost.setEntity(new StringEntity(data));
+        RequestConfig requestConfig = RequestConfig.custom()
+                .setCookieSpec(CookieSpecs.STANDARD)
+                .build();
+        httpPost.setConfig(requestConfig);
         CloseableHttpResponse response = null;
         String responseString = "";
         try {
             response = httpClient.execute(httpPost);
-            responseString = response.toString();
+            //int responseCode = response.getStatusLine().getStatusCode();
+            responseString = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -51,12 +57,12 @@ public class Requests {
         String responseString = "";
         try {
             response = httpClient.execute(httpGet);
-            responseString = response.toString();
+            int responseCode = response.getStatusLine().getStatusCode();
+            responseString = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-
         finally {
             if (response != null) {
                 try {

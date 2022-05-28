@@ -51,7 +51,6 @@ public class ClientApplication {
 				System.out.println("Digite a data da reserva: ");
 				sc = new Scanner(System.in);
 				String date = sc.nextLine();
-
 				ClientDataDTO client = new ClientDataDTO(cpf, name);
 				System.out.println(ReservationService.attemptReservation(restaurantName, date, client));
 

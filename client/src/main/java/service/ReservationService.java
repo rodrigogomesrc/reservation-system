@@ -37,7 +37,7 @@ public class ReservationService {
 
     //Request
     public static MenuDTO getRestaurantMenu(String restaurantName){
-        String context = "/getRestaurantMenu";
+        String context = "/listRestaurantMenu";
         String json = "{\"name\":\"" + restaurantName + "\"}";
         String response = null;
         try {
@@ -45,10 +45,7 @@ public class ReservationService {
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
-        if(response != null){
-            return getMenuDTOFromJSON(response);
-        }
-        return null;
+        return getMenuDTOFromJSON(response);
     }
 
     //Request
