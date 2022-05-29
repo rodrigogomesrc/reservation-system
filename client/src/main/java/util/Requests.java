@@ -29,7 +29,6 @@ public class Requests {
         String responseString = "";
         try {
             response = httpClient.execute(httpPost);
-            //int responseCode = response.getStatusLine().getStatusCode();
             responseString = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
 
         } catch (Exception e) {
@@ -57,7 +56,6 @@ public class Requests {
         String responseString = "";
         try {
             response = httpClient.execute(httpGet);
-            int responseCode = response.getStatusLine().getStatusCode();
             responseString = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
         }
         catch (Exception e) {
