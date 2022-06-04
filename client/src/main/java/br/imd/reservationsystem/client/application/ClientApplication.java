@@ -41,10 +41,6 @@ public class ClientApplication {
 			if (option == 1) {
 
 				String restaurantName = getRestaurantName();
-
-				System.out.println("Digite o nome do Restaurante: ");
-				sc = new Scanner(System.in);
-
 				System.out.println("*** Menu ***");
 				System.out.println(ReservationService.getStringRestaurantMenu(restaurantName));
 
