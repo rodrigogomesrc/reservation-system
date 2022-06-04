@@ -24,6 +24,9 @@ public class ClientApplication {
 		System.out.println("Digite o seu cpf: ");
 		long cpf = sc.nextLong();
 
+		CheckReservationsUpdate reservationsUpdate = new CheckReservationsUpdate(cpf);
+		reservationsUpdate.start();
+
 		while(true) {
 			System.out.println("");
 			System.out.println("Digite uma das opções: ");

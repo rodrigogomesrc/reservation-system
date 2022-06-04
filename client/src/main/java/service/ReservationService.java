@@ -63,7 +63,7 @@ public class ReservationService {
     }
 
     //Request
-    public static String checkReservationStatus(String restaurantName, String date, long cpf){
+    public static String checkReservationStatus(long cpf){
         String context = "/checkReservationStatus";
         String json = "{\"cpf\":\"" + cpf + "\"}";
         try {
